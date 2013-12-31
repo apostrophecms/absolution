@@ -32,5 +32,12 @@ describe('absolution', function() {
   it('should not panic if ../ is overused', function() {
     assert.equal(absolution('<a href="../../../peer.html">Test</a>', 'http://example.com/child/'), '<a href="http://example.com/peer.html">Test</a>');
   });
+  it('should support the decorator option', function() {
+    assert.equal(absolution('<a href="../peer.html">Test</a>', 'http://example.com/child/', {
+      decorator: function(url) {
+        return 'http://test.com?url=' + encodeURIComponent(url);
+      }
+    }), '<a href="http://test.com?url=http%3A%2F%2Fexample.com%2Fpeer.html">Test</a>');
+  });
 });
 

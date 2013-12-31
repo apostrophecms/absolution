@@ -22,6 +22,9 @@ var absolution = module.exports = function(input, base, options) {
       _.each(options.urlAttributes, function(attr) {
         if (_.has(attribs, attr)) {
           attribs[attr] = url.resolve(base, attribs[attr]);
+          if (options.decorator) {
+            attribs[attr] = options.decorator(attribs[attr]);
+          }
         }
       });
       _.extend(attribs, changes);

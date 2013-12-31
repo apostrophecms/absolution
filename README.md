@@ -24,7 +24,17 @@
 
 Boom!
 
+If you want to do further processing of each absolute URL, you can also pass a decorator function:
+
+    var clean = absolution(dirty, 'http://example.com', {
+      decorator: function(url) {
+        return 'http://mycoolthing.com?url=' + encodeURIComponent(url);
+      }
+    });
+
 ## Changelog
+
+0.2.0: decorator option added.
 
 0.1.0: initial release.
 
