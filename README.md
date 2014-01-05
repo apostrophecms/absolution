@@ -34,6 +34,8 @@ If you want to do further processing of each absolute URL, you can also pass a d
 
 ## Changelog
 
+1.0.0: no new changes; declared stable as with the addition of the decorator option there's little left to do, and all tests are passing nicely.
+
 0.2.0: decorator option added.
 
 0.1.0: initial release.

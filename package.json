@@ -1,6 +1,6 @@
 {
   "name": "absolution",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "absolution accepts HTML and a base URL, and returns HTML with absolute URLs. Great for generating valid RSS feeds.",
   "main": "index.js",
   "scripts": {
