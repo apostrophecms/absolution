@@ -18,16 +18,14 @@ var absolution = module.exports = function(input, base, options) {
 
   var parser = new htmlparser.Parser({
     onopentag: function(name, attribs) {
-      var changes = {};
       _.each(options.urlAttributes, function(attr) {
-        if (_.has(attribs, attr)) {
+        if (_.has(attribs, attr) && attribs[attr].trim()) {
           attribs[attr] = url.resolve(base, attribs[attr]);
           if (options.decorator) {
             attribs[attr] = options.decorator(attribs[attr]);
           }
         }
       });
-      _.extend(attribs, changes);
       result += '<' + name;
       _.each(attribs, function(value, a) {
         result += ' ' + a;
