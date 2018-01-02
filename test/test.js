@@ -22,6 +22,11 @@ describe('absolution', function() {
   it('should preserve entities as such', function() {
     assert.equal(absolution('<a name="&lt;silly&gt;">&lt;Kapow!&gt;</a>'), '<a name="&lt;silly&gt;">&lt;Kapow!&gt;</a>');
   });
+  // Note that quotation marks are removed in the below test because all attributes are reconstructed
+  // and there is no need for quotation marks without a value
+  it('should keep empty url attributes empty', function() {
+    assert.equal(absolution('<link rel="stylesheet" href="" />', 'http://localhost:8000/index.html'), '<link rel="stylesheet" href />');
+  });
   // Finally the cool thing!
   it('should resolve relative URLs ("file" in same "folder")', function() {
     assert.equal(absolution('<a href="grandchild.html">Test</a>', 'http://example.com/child/'), '<a href="http://example.com/child/grandchild.html">Test</a>');
