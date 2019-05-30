@@ -1,10 +1,10 @@
 {
   "name": "absolution",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "absolution accepts HTML and a base URL, and returns HTML with absolute URLs. Great for generating valid RSS feeds.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/test.js"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -30,5 +30,8 @@
   "dependencies": {
     "htmlparser2": "~3.3.0",
     "lodash": "~2.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.1.4"
   }
 }
