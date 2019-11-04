@@ -12,25 +12,29 @@
 
 ## How to use
 
-    npm install absolution
+`npm install absolution`
 
-    var absolution = require('absolution');
+```javascript
+var absolution = require('absolution');
 
-    var dirty = '<a href="/foo">Foo!</a>';
-    var clean = absolution(dirty, 'http://example.com');
+var dirty = '<a href="/foo">Foo!</a>';
+var clean = absolution(dirty, 'http://example.com');
 
-    // clean is now:
-    // <a href="http://example.com/foo">Foo!</a>
+// clean is now:
+// <a href="http://example.com/foo">Foo!</a>
+```
 
 Boom!
 
 If you want to do further processing of each absolute URL, you can also pass a decorator function:
 
-    var clean = absolution(dirty, 'http://example.com', {
-      decorator: function(url) {
-        return 'http://mycoolthing.com?url=' + encodeURIComponent(url);
-      }
-    });
+```javascript
+var clean = absolution(dirty, 'http://example.com', {
+  decorator: function(url) {
+    return 'http://mycoolthing.com?url=' + encodeURIComponent(url);
+  }
+});
+```
 
 ## Changelog
 
