@@ -10,7 +10,7 @@ var absolution = module.exports = function(input, base, options) {
   }
 
   var selfClosingMap = {};
-  _.each(options.selfClosing, function(tag) {
+  _.forEach(options.selfClosing, function(tag) {
     selfClosingMap[tag] = true;
   });
 
@@ -18,7 +18,7 @@ var absolution = module.exports = function(input, base, options) {
 
   var parser = new htmlparser.Parser({
     onopentag: function(name, attribs) {
-      _.each(options.urlAttributes, function(attr) {
+      _.forEach(options.urlAttributes, function(attr) {
         if (_.has(attribs, attr) && attribs[attr].trim()) {
           attribs[attr] = url.resolve(base, attribs[attr]);
           if (options.decorator) {
@@ -27,7 +27,7 @@ var absolution = module.exports = function(input, base, options) {
         }
       });
       result += '<' + name;
-      _.each(attribs, function(value, a) {
+      _.forEach(attribs, function(value, a) {
         result += ' ' + a;
         if (value.length) {
           // Values are ALREADY escaped, calling escapeHtml here

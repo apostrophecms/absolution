@@ -45,4 +45,3 @@ describe('absolution', function() {
     }), '<a href="http://test.com?url=http%3A%2F%2Fexample.com%2Fpeer.html">Test</a>');
   });
 });
-

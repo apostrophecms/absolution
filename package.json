@@ -1,6 +1,6 @@
 {
   "name": "absolution",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "absolution accepts HTML and a base URL, and returns HTML with absolute URLs. Great for generating valid RSS feeds.",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/punkave/absolution.git"
+    "url": "https://github.com/apostrophecms/absolution.git"
   },
   "keywords": [
     "url",
@@ -24,7 +24,7 @@
     "rss",
     "feed"
   ],
-  "author": "P'unk Avenue LLC",
+  "author": "Apostrophe Technologies",
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
@@ -32,6 +32,6 @@
     "lodash": "~4.17.15"
   },
   "devDependencies": {
-    "mocha": "^6.1.4"
+    "mocha": "^7.2.0"
   }
 }
