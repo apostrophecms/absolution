@@ -1,9 +1,7 @@
-var assert = require("assert");
+const assert = require("assert");
+const absolution = require('../index.js');
+
 describe('absolution', function() {
-  var absolution;
-  it('should be successfully initialized', function() {
-    absolution = require('../index.js');
-  });
   it('should pass through unrelated markup unaltered', function() {
     assert.equal(absolution('<div><p>Hello <b>there</b></p></div>', 'http://example.com/child/'), '<div><p>Hello <b>there</b></p></div>');
   });
@@ -43,5 +41,10 @@ describe('absolution', function() {
         return 'http://test.com?url=' + encodeURIComponent(url);
       }
     }), '<a href="http://test.com?url=http%3A%2F%2Fexample.com%2Fpeer.html">Test</a>');
+  });
+  it('should use single quotes for data attributes that contain JSON', function() {
+    const result = absolution(`<div data-test1='{"foo":"bar"}' data-test2='other'>Test</div>`, 'http://example.com/child/');
+    const expected = `<div data-test1='{"foo":"bar"}' data-test2="other">Test</div>`;
+    assert.equal(result, expected);
   });
 });

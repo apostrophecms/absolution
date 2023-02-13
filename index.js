@@ -30,9 +30,10 @@ var absolution = module.exports = function(input, base, options) {
       _.forEach(attribs, function(value, a) {
         result += ' ' + a;
         if (value.length) {
+          const quote = value.startsWith('{"') ? `'` : `"`;
           // Values are ALREADY escaped, calling escapeHtml here
           // results in double escapes
-          result += '="' + value + '"';
+          result += `=${quote}${value}${quote}`;
         }
       });
       if (_.has(selfClosingMap, name)) {

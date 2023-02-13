@@ -38,6 +38,8 @@ var clean = absolution(dirty, 'http://example.com', {
 
 ## Changelog
 
+1.0.3 (UNRELEASED): Use single quotes for attributes that contain JSON data.
+
 1.0.2: Updates to lodash v4 and mocha v7 for security vulnerability fixes. Also update package metadata.
 
 1.0.0: no new changes; declared stable as with the addition of the decorator option there's little left to do, and all tests are passing nicely.
