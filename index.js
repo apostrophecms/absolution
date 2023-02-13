@@ -32,7 +32,14 @@ var absolution = module.exports = function(input, base, options) {
         if (value.length) {
           // Values are ALREADY escaped, calling escapeHtml here
           // results in double escapes
-          result += '="' + value + '"';
+          if (value.includes('"')) {
+            // Since htmlparser2 only gives us back valid attributes,
+            // we can assume any value with double quotes should be a
+            // single-quoted attribute
+            result += "='" + value + "'";
+          } else {
+            result += '="' + value + '"';
+          }
         }
       });
       if (_.has(selfClosingMap, name)) {
