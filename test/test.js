@@ -44,4 +44,18 @@ describe('absolution', function() {
       }
     }), '<a href="http://test.com?url=http%3A%2F%2Fexample.com%2Fpeer.html">Test</a>');
   });
+  it('double quotes get single quoted', function() {
+    assert.equal(absolution(`<a test='"'>quote test</a>`, 'http://example.com'), `<a test='"'>quote test</a>`);
+  });
+  it('single quotes get double quoted', function() {
+    assert.equal(absolution(`<a test="'">quote test</a>`, 'http://example.com'), `<a test="'">quote test</a>`);
+  });
+  it('other entity escapes are preserved', function() {
+    assert.equal(absolution(`<a test="&lt;">quote test</a>`, 'http://example.com'), `<a test="&lt;">quote test</a>`);
+  });
+  it('should use single quotes for data attributes that contain JSON', function() {
+    const result = absolution(`<div data-test1='{"foo":"bar"}'>Test</div>`, 'http://example.com/child/');
+    const expected = `<div data-test1='{"foo":"bar"}'>Test</div>`;
+    assert.equal(result, expected);
+  });
 });
