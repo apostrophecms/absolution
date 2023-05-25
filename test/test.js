@@ -1,9 +1,7 @@
 var assert = require("assert");
+var absolution = require('../index.js');
+
 describe('absolution', function() {
-  var absolution;
-  it('should be successfully initialized', function() {
-    absolution = require('../index.js');
-  });
   it('should pass through unrelated markup unaltered', function() {
     assert.equal(absolution('<div><p>Hello <b>there</b></p></div>', 'http://example.com/child/'), '<div><p>Hello <b>there</b></p></div>');
   });
@@ -56,6 +54,44 @@ describe('absolution', function() {
   it('should use single quotes for data attributes that contain JSON', function() {
     const result = absolution(`<div data-test1='{"foo":"bar"}'>Test</div>`, 'http://example.com/child/');
     const expected = `<div data-test1='{"foo":"bar"}'>Test</div>`;
+    assert.equal(result, expected);
+  });
+  it('should handle custom closing tags', function() {
+    const svg = `
+      <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+        <a href="/docs/Web/SVG/Element/circle">
+          <circle cx="50" cy="40" r="35"/>
+        </a>
+        <path d="M 10 10 H 90 V 90 H 10 L 10 10"/>
+      
+        <circle cx="10" cy="10" r="2" fill="red"/>
+        <circle cx="90" cy="90" r="2" fill="red"/>
+        <circle cx="90" cy="10" r="2" fill="red"/>
+        <circle cx="10" cy="90" r="2" fill="red"/>
+      </svg>
+    `;
+
+    const expected = `
+      <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+        <a href="http://example.com/docs/Web/SVG/Element/circle">
+          <circle cx="50" cy="40" r="35" />
+        </a>
+        <path d="M 10 10 H 90 V 90 H 10 L 10 10" />
+      
+        <circle cx="10" cy="10" r="2" fill="red" />
+        <circle cx="90" cy="90" r="2" fill="red" />
+        <circle cx="90" cy="10" r="2" fill="red" />
+        <circle cx="10" cy="90" r="2" fill="red" />
+      </svg>
+    `;
+
+    const result = absolution(svg, 'http://example.com', {
+      selfClosing: [
+        ...absolution.defaults.selfClosing,
+        'path',
+        'circle'
+      ]
+    });
     assert.equal(result, expected);
   });
 });

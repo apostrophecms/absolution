@@ -1,3 +1,7 @@
+## UNRELEASED
+
+* Add test and documentation about adding custom self-closing tags.
+
 ## 1.0.3 (2023-02-13)
 
 * Although attributes are already escaped, we still have to output them

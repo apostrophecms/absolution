@@ -36,6 +36,45 @@ var clean = absolution(dirty, 'http://example.com', {
 });
 ```
 
+## Having issues with SVG markup?
+
+> How can I keep SVG self-closing tags intact?
+
+You can add custom self-closing tags via the `selfClosing` option:
+
+```javascript
+var absolution = require('absolution');
+
+var dirty = `
+  <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+    <a href="/docs/Web/SVG/Element/circle">
+      <circle cx="50" cy="40" r="35"/>
+    </a>
+    <path d="M 10 10 H 90 V 90 H 10 L 10 10"/>
+    <circle cx="10" cy="90" r="2" fill="red"/>
+  </svg>
+`;
+var clean = absolution(dirty, 'http://example.com', {
+  selfClosing: [
+    // keep default `selfClosing` tags:
+    ...absolution.defaults.selfClosing,
+
+    // add custom tags:
+    'path',
+    'circle'
+  ]
+});
+
+// clean is now:
+// <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+//   <a href="http://example.com/docs/Web/SVG/Element/circle">
+//     <circle cx="50" cy="40" r="35" />
+//   </a>
+//   <path d="M 10 10 H 90 V 90 H 10 L 10 10" />
+//   <circle cx="10" cy="10" r="2" fill="red" />
+// </svg>
+```
+
 ## Changelog
 
 1.0.2: Updates to lodash v4 and mocha v7 for security vulnerability fixes. Also update package metadata.
