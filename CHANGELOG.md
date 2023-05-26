@@ -1,4 +1,4 @@
-## UNRELEASED
+## 1.0.4 (2023-05-26)
 
 * Add test and documentation about adding custom self-closing tags.
 
