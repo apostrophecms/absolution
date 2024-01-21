@@ -1,6 +1,5 @@
 var assert = require("assert");
 var absolution = require('../index.js');
-const exp = require("constants");
 
 describe('absolution', function() {
   it('should pass through unrelated markup unaltered', function() {
@@ -97,10 +96,9 @@ describe('absolution', function() {
   });
 
   it('should handle the scrset in img', function() {
-    const result = absolution(`<img src="cat.jpg" alt="cat" 
-    srcset="cat-320.jpg 320w" />`, 'http://example.com/');
+    const result = absolution(`<img src="cat.jpg" alt="cat" srcset="cat-320.jpg 320w, cat-640.jpg 640w, cat-1280.jpg 1280w">`, 'http://example.com/');
 
-    const expected = `<img src="http://example.com/cat.jpg" alt="cat" srcset="http://example.com/cat-320.jpg 320w" />`
+    const expected = `<img src="http://example.com/cat.jpg" alt="cat" srcset="http://example.com/cat-320.jpg 320w, http://example.com/cat-640.jpg 640w, http://example.com/cat-1280.jpg 1280w" />`
 
     assert.equal(result, expected);
   })
