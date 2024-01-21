@@ -1,6 +1,6 @@
-## 1.0.5 (unreleased)
+## (unreleased)
 
-* Added the fix for srcset in img tag.
+* Added a fix for srcset in img tag.
 
 ## 1.0.4 (2023-05-26)
 
