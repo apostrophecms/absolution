@@ -1,3 +1,7 @@
+## 1.0.5 (unreleased)
+
+* Added the fix for srcset in img tag.
+
 ## 1.0.4 (2023-05-26)
 
 * Add test and documentation about adding custom self-closing tags.
