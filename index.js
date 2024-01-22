@@ -20,7 +20,21 @@ var absolution = module.exports = function(input, base, options) {
     onopentag: function(name, attribs) {
       _.forEach(options.urlAttributes, function(attr) {
         if (_.has(attribs, attr) && attribs[attr].trim()) {
-          attribs[attr] = url.resolve(base, attribs[attr]);
+          if (attr === 'srcset') {
+            let strings = _.split(attribs[attr], ",");
+            
+            _.forEach(strings, function(str, index) {
+                str = str.trim();
+                strings[index] = _.replace(str, _.split(str, " ")[0], url.resolve(base, _.split(str, " ")[0]))
+            })
+
+            strings = strings.join(", ");
+            attribs[attr] = strings;
+
+          } else {
+            attribs[attr] = url.resolve(base, attribs[attr]);
+          }
+
           if (options.decorator) {
             attribs[attr] = options.decorator(attribs[attr]);
           }
@@ -67,6 +81,6 @@ var absolution = module.exports = function(input, base, options) {
 };
 
 absolution.defaults = {
-  urlAttributes: [ 'href', 'src', 'action' ],
+  urlAttributes: [ 'href', 'src', 'action', 'srcset' ],
   selfClosing: [ 'img', 'br', 'hr', 'area', 'base', 'basefont', 'input', 'link', 'meta' ]
 };

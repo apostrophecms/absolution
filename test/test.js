@@ -94,4 +94,74 @@ describe('absolution', function() {
     });
     assert.equal(result, expected);
   });
+
+  it('should handle the srcset in img', function() {
+    const result = absolution(`<img src="cat.jpg" alt="cat" srcset="cat-320.jpg 320w, cat-640.jpg 640w, cat-1280.jpg 1280w">`, 'http://example.com/');
+
+    const expected = `<img src="http://example.com/cat.jpg" alt="cat" srcset="http://example.com/cat-320.jpg 320w, http://example.com/cat-640.jpg 640w, http://example.com/cat-1280.jpg 1280w" />`
+
+    assert.equal(result, expected);
+  })
+
+  it('should handle the srcset if srcset configured correct in img', function() {
+    const result = absolution(`<img src="http://example.com/cat.jpg" alt="cat" srcset="http://example.com/cat-320.jpg 320w, http://example.com/cat-640.jpg 640w, http://example.com/cat-1280.jpg 1280w" />`, 'http://example.com/');
+    const expected = `<img src="http://example.com/cat.jpg" alt="cat" srcset="http://example.com/cat-320.jpg 320w, http://example.com/cat-640.jpg 640w, http://example.com/cat-1280.jpg 1280w" />`
+
+    assert.equal(result, expected)
+  })
+
+
+  it('should handle the srcset in picture', function() {
+    const picture = `
+      <picture>
+        <source media="(min-width:650px)" srcset="img_pink_flowers.jpg">
+        <source media="(min-width:465px)" srcset="img_white_flower.jpg">
+        <img src="img_orange_flowers.jpg" alt="Flowers" style="width:auto;">
+      </picture>
+      `;
+
+    const expected = `
+      <picture>
+        <source media="(min-width:650px)" srcset="http://example.com/img_pink_flowers.jpg" />
+        <source media="(min-width:465px)" srcset="http://example.com/img_white_flower.jpg" />
+        <img src="http://example.com/img_orange_flowers.jpg" alt="Flowers" style="width:auto;" />
+      </picture>
+      `;
+
+    const result = absolution(picture, 'http://example.com/', {
+      selfClosing: [
+        ...absolution.defaults.selfClosing,
+        'source'
+      ]
+    });
+    assert.equal(result, expected); 
+  })
+
+  it('should handle the srcset if srcset configured correct in picture', function() {
+    const picture = `
+    <picture>
+      <source media="(min-width:650px)" srcset="http://example.com/img_pink_flowers.jpg" />
+      <source media="(min-width:465px)" srcset="http://example.com/img_white_flower.jpg" />
+      <img src="http://example.com/img_orange_flowers.jpg" alt="Flowers" style="width:auto;" />
+    </picture>
+    `;
+    const expected = `
+    <picture>
+      <source media="(min-width:650px)" srcset="http://example.com/img_pink_flowers.jpg" />
+      <source media="(min-width:465px)" srcset="http://example.com/img_white_flower.jpg" />
+      <img src="http://example.com/img_orange_flowers.jpg" alt="Flowers" style="width:auto;" />
+    </picture>
+    `;
+  
+    const result = absolution(picture, 'http://example.com/', {
+        selfClosing: [
+          ...absolution.defaults.selfClosing,
+          'source'
+        ]
+    });
+    assert.equal(result, expected); 
+  })
+
 });
+
+
