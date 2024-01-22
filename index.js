@@ -20,7 +20,7 @@ var absolution = module.exports = function(input, base, options) {
     onopentag: function(name, attribs) {
       _.forEach(options.urlAttributes, function(attr) {
         if (_.has(attribs, attr) && attribs[attr].trim()) {
-          if(attr === 'srcset') {
+          if (attr === 'srcset') {
             let strings = _.split(attribs[attr], ",");
             
             _.forEach(strings, function(str, index) {
