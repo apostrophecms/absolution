@@ -1,6 +1,6 @@
 ## (unreleased)
 
-* Added a fix for srcset in img tag.
+* Added a fix for srcset in img tag. Thanks to [Gauav Kumar](https://github.com/gkumar9891) for this contribution!
 
 ## 1.0.4 (2023-05-26)
 
