@@ -1,4 +1,4 @@
-## (unreleased)
+## 1.1.0 (2024-01-25)
 
 * Added a fix for srcset in img tag. Thanks to [Gauav Kumar](https://github.com/gkumar9891) for this contribution!
 
